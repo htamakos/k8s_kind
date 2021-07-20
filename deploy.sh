@@ -12,11 +12,8 @@ if [ "${running}" != 'true' ]; then
 fi
 
 ## create cluster
-cluster_name="kind"
-/dev/null 2>&1 | grep kind > /dev/null 2>&1
-if [ $? -eq 1 ]; then
-    kind create cluster --config cluster.yaml --name $cluster_name
-fi
+cluster_name="cluster01"
+kind create cluster --config cluster.yaml --name $cluster_name
 
 ## connect the registry to the cluster network
 docker network connect "kind" "${reg_name}" || true
